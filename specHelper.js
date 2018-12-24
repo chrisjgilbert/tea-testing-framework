@@ -1,13 +1,19 @@
-var tea = {}
+var tea = {
 
-tea.assert = function(val) {
-  if (val) return true;
+  check: function(description, test) {
+    try {
+      test();
+      console.log(`%c PASS: ${description}`, "color: green");
+    } catch(e) {
+      console.log(`%c FAIL: ${description}`, "color: red");
+      console.log(e.stack);
+    }
+  },
 
-  throw new Error('Assertion failed');
-};
+  assert: function(val) {
+    if (val) return true;
 
-tea.check = function(description, test) {
-  try {
-    
+    throw new Error('Assertion failed');
   }
+
 }
