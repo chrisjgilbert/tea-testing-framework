@@ -1,19 +1,20 @@
 var tea = {
 
-  check: function(description, test) {
-    try {
-      test();
-      console.log(`%c PASS: ${description}`, "color: green");
-    } catch(e) {
-      console.log(`%c FAIL: ${description}`, "color: red");
-      console.log(e.stack);
-    }
+  describe: function(desc, fn) {
+    console.log(desc)
+    fn()
   },
 
-  assert: function(val) {
-    if (val) return true;
+  it: function(desc, fn) {
+    this.describe("#" + desc, fn)
+  },
 
-    throw new Error('Assertion failed');
+  check: function(assertionToCheck) {
+    if (!assertionToCheck) {
+      throw new Error("Assertion failed: " + assertionToCheck + " is not truthy")
+    } else {
+      console.log('%c Test passed!', "color: green")
+    }
   }
-
+  
 }
